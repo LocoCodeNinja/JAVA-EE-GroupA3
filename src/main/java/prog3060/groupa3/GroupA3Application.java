@@ -1,4 +1,4 @@
-package cpaProg3060.groupa3;
+package prog3060.groupa3;
 
 import Service.HRManagerService;
 import org.springframework.boot.SpringApplication;
