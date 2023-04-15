@@ -20,12 +20,21 @@ public interface EmployeeRepository extends CrudRepository<EmployeesEntity, Inte
     @Query("SELECT e FROM EmployeesEntity e WHERE e.managerId = 108")
     List<EmployeesEntity> findEmployeesByManagerId();
 
-    @Query("SELECT e.lastName, e.jobId, d.departmentId, d.departmentName FROM EmployeesEntity e JOIN e.department d JOIN d.location l WHERE l.city = 'Toronto'")
+    @Query("SELECT e.lastName, e.jobId, d.departmentId, d.departmentName " +
+            "FROM EmployeesEntity e " +
+            "JOIN DepartmentsEntity d ON e.departmentId = d.departmentId " +
+            "JOIN LocationsEntity l ON d.locationId = l.locationId " +
+            "WHERE l.city = 'Toronto'")
     List<Object[]> findEmployeesInToronto();
 
     @Query("SELECT d.departmentId, AVG(e.salary) as avgSalary FROM EmployeesEntity e JOIN e.department d GROUP BY d.departmentId ORDER BY d.departmentId")
     List<Object[]> findAvgSalaryByDepartment();
 
-    @Query("SELECT m.firstName, m.lastName, d.departmentId, COUNT(e) as totalEmployees FROM EmployeesEntity e JOIN e.department d JOIN d.manager m GROUP BY m.employeeId, d.departmentId")
+    // DISPLAY MANAGER NAME, DEPARTMENT ID OF MANAGER, EMPLOYEE COUNT as Total_Employees
+    // Dependent on Jobs, Employee, Departments
+    // get job_id where job_title CONTAINS "Manager", in EMPLOYEES find job_id matches job_id of those with Manager,
+    // concat first and last name, get department_id, get count of all employees under that department_id  as Total_Employees
+    @Query("SELECT CONCAT(e.firstName, ' ', e.lastName) as managerName, e.departmentId, (SELECT COUNT(*) FROM EmployeesEntity WHERE departmentId = e.departmentId) as totalEmployees FROM EmployeesEntity e JOIN JobsEntity j ON e.jobId = j.jobId WHERE j.jobTitle LIKE '%Manager%'")
     List<Object[]> findManagerAndTotalEmployees();
+
 }

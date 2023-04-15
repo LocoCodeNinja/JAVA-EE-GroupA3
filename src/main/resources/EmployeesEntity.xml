@@ -40,4 +40,21 @@
             </basic>
         </attributes>
     </entity>
+    <entity class="Model.JobsEntity">
+        <table name="jobs" schema="hr" catalog=""/>
+        <attributes>
+            <id name="jobId">
+                <column name="job_id" precision="-1"/>
+            </id>
+            <basic name="jobTitle">
+                <column name="job_title" length="35"/>
+            </basic>
+            <basic name="minSalary">
+                <column name="min_salary" nullable="false" precision="2"/>
+            </basic>
+            <basic name="maxSalary">
+                <column name="max_salary" nullable="false" precision="2"/>
+            </basic>
+        </attributes>
+    </entity>
 </entity-mappings>
