@@ -8,10 +8,11 @@ import java.util.List;
 
 public interface DepartmentRepository extends CrudRepository<DepartmentsEntity, Integer> {
 
+    // selects data from DepartmentsEntity where locationId is 1700
     @Query("SELECT d FROM DepartmentsEntity d WHERE d.locationId = 1700")
     List<DepartmentsEntity> findDepartmentsByLocationId();
 
-    //Display the department name, city, and state province for each department.
+    // display the department name, city, and state province for each department.
     @Query("SELECT d.departmentName, l.city, l.stateProvince " +
             "FROM DepartmentsEntity d " +
             "JOIN LocationsEntity l ON d.locationId = l.locationId")

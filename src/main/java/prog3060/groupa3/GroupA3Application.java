@@ -20,7 +20,6 @@ public class GroupA3Application {
         ApplicationContext ctx = SpringApplication.run(GroupA3Application.class, args);
         // test all Services here
         HRManagerService hrManagerService = ctx.getBean(HRManagerService.class);
-
         hrManagerService.runQueries();
     }
 }
