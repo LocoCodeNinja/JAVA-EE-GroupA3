@@ -5,7 +5,6 @@ import Model.EmployeesEntity;
 import Repository.CountryRepository;
 import Repository.DepartmentRepository;
 import Repository.EmployeeRepository;
-import Repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -103,15 +102,16 @@ public class HRManagerService {
         List<Object[]> avgSalaryByDepartment = employeeRepository.findAvgSalaryByDepartment();
         System.out.println("\n9. Display the average of sum of the salaries and group the result with the department id. Order the result with department id\n");
         // display sums from using EmployeeEntity and DepartmentsEntity, also formats decimals
-        System.out.printf("%-15s %15s\n", "Department ID", "Average Salary");
-        System.out.println("--------------------------------------");
+        System.out.printf("%-15s %-25s %10s\n", "Department ID", "Department Name", "Average Salary");
+        System.out.println("---------------------------------------------------------");
         for (Object[] result : avgSalaryByDepartment) {
-            String formattedSalary = String.format("%.2f", (Double) result[1]);
-            if (formattedSalary.endsWith(".00")) {
+            String formattedSalary = String.format("$%.2f", (Double) result[2]);
+            if (formattedSalary.endsWith(".0")) {
                 formattedSalary = formattedSalary.substring(0, formattedSalary.length() - 3);
             }
-            System.out.printf("%-15s %15s\n", result[0], formattedSalary);
+            System.out.printf("%-15s %-25s %10s\n", result[0], result[1], formattedSalary);
         }
+        System.out.println("---------------------------------------------------------");
 
 
         // 10. Select the Manager name, department id of manager, the count of employees working under that manager as Total_Employees
@@ -133,8 +133,9 @@ public class HRManagerService {
     public static void printEmployeeInfo(List<EmployeesEntity> employees) {
         employees.forEach(employee -> {
             System.out.println("Employee ID: " + employee.getEmployeeId());
-            System.out.println("First Name: " + employee.getFirstName());
-            System.out.println("Last Name: " + employee.getLastName());
+            System.out.println("Full Name: " + employee.getFirstName() + " " + employee.getLastName());
+            // System.out.println("First Name: " + employee.getFirstName());
+            // System.out.println("Last Name: " + employee.getLastName());
             System.out.println("Email: " + employee.getEmail());
             System.out.println("Phone Number: " + employee.getPhoneNumber());
             System.out.println("Hire Date: " + employee.getHireDate());

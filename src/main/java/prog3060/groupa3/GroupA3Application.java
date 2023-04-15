@@ -8,8 +8,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import java.math.BigDecimal;
-
 @SpringBootApplication
 @ComponentScan(basePackageClasses = {HRManagerService.class})
 @EntityScan("Model")

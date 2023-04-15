@@ -26,15 +26,16 @@ public interface EmployeeRepository extends CrudRepository<EmployeesEntity, Inte
     List<EmployeesEntity> findEmployeesByManagerId();
 
     // select data from EmployeesEntity and match with DepartmentsEntity and LocationsEntity where city is "Toronto"
-    @Query("SELECT e.lastName, e.jobId, d.departmentId, d.departmentName " +
+    @Query("SELECT e.lastName, j.jobTitle, d.departmentId, d.departmentName " +
             "FROM EmployeesEntity e " +
             "JOIN DepartmentsEntity d ON e.departmentId = d.departmentId " +
+            "JOIN JobsEntity j ON e.jobId = j.jobId " +
             "JOIN LocationsEntity l ON d.locationId = l.locationId " +
             "WHERE l.city = 'Toronto'")
     List<Object[]> findEmployeesInToronto();
 
     // select departmentId and round the average salary by 2 decimals, order by departmentId
-    @Query("SELECT d.departmentId, ROUND(AVG(e.salary), 2) as avgSalary FROM EmployeesEntity e JOIN e.department d GROUP BY d.departmentId ORDER BY d.departmentId")
+    @Query("SELECT d.departmentId, d.departmentName, ROUND(AVG(e.salary), 2) as avgSalary FROM EmployeesEntity e JOIN e.department d GROUP BY d.departmentId, d.departmentName ORDER BY d.departmentId")
     List<Object[]> findAvgSalaryByDepartment();
 
     // get job_id where job_title CONTAINS "Manager", in EMPLOYEES find job_id matches job_id of those with Manager,
