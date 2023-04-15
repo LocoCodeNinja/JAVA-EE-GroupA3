@@ -102,14 +102,14 @@ public class HRManagerService {
         List<Object[]> avgSalaryByDepartment = employeeRepository.findAvgSalaryByDepartment();
         System.out.println("\n9. Display the average of sum of the salaries and group the result with the department id. Order the result with department id\n");
         // display sums from using EmployeeEntity and DepartmentsEntity, also formats decimals
-        System.out.printf("%-15s %-25s %10s\n", "Department ID", "Department Name", "Average Salary");
+        System.out.printf("%-15s %-25s %15s\n", "Department ID", "Department Name", "Average Salary");
         System.out.println("---------------------------------------------------------");
         for (Object[] result : avgSalaryByDepartment) {
             String formattedSalary = String.format("$%.2f", (Double) result[2]);
             if (formattedSalary.endsWith(".0")) {
                 formattedSalary = formattedSalary.substring(0, formattedSalary.length() - 3);
             }
-            System.out.printf("%-15s %-25s %10s\n", result[0], result[1], formattedSalary);
+            System.out.printf("%-15s %-25s %15s\n", result[0], result[1], formattedSalary);
         }
         System.out.println("---------------------------------------------------------");
 

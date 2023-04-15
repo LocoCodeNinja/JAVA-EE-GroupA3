@@ -11,6 +11,7 @@ import java.util.List;
 public interface CountryRepository extends CrudRepository<CountriesEntity, String> {
 
     // counts number of locations associated with each country in the CountriesEntity and groups by countryId
-    @Query("SELECT c.countryId, COUNT(l) as cityCount FROM CountriesEntity c JOIN c.locations l GROUP BY c.countryId")
+    @Query("SELECT c.countryId, COUNT(l) as cityCount FROM CountriesEntity c " +
+            "JOIN c.locations l GROUP BY c.countryId")
     List<Object[]> findCountryAndCityCount();
 }
