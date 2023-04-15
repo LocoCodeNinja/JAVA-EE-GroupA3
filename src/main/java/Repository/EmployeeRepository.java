@@ -1,4 +1,7 @@
 package Repository;
 
-public interface EmployeeRepository {
+import Model.EmployeesEntity;
+import org.springframework.data.repository.CrudRepository;
+
+public interface EmployeeRepository extends CrudRepository<EmployeesEntity, Integer> {
 }
