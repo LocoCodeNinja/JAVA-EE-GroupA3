@@ -30,9 +30,93 @@ public class HRManagerService {
 
         // 1. Find all Employees whose salary is in the range 9000, 17000
         List<EmployeesEntity> employeesBySalaryRange = employeeRepository.findEmployeesBySalaryRange();
-
         // Display the list of EmployeesEntity objects
-        employeesBySalaryRange.forEach(employee -> {
+        System.out.println("\n1. Find all Employees whose salary is in the range 9000, 17000\n");
+        printEmployeeInfo(employeesBySalaryRange);
+
+        // 2. Find all Employees whose first name ends with Letter a
+        List<EmployeesEntity> employeesWithFirstNameEndingA = employeeRepository.findEmployeesByFirstNameEndsWithA();
+        System.out.println("\n2. Find all Employees whose first name ends with Letter 'a'\n");
+        printEmployeeInfo(employeesWithFirstNameEndingA);
+
+        // 3. Find all Employees working in Accounting Department
+        List<EmployeesEntity> employeesInAccounting = employeeRepository.findEmployeesInAccountingDepartment();
+        System.out.println("\n3. Find all Employees working in Accounting Department\n");
+        printEmployeeInfo(employeesInAccounting);
+
+        // 4. Find all Employees working under Manager ID 108
+        List<EmployeesEntity> employeesUnderManager108 = employeeRepository.findEmployeesByManagerId();
+        // Process the results or print them
+
+        // 5. Find all Departments with Location ID 1700
+        List<DepartmentsEntity> departmentsInLocation1700 = departmentRepository.findDepartmentsByLocationId();
+        System.out.println("\n5. Find all Departments with Location ID 1700\n");
+        departmentsInLocation1700.forEach(department -> {
+            System.out.println("Department ID: " + department.getDepartmentId());
+            System.out.println("Department Name: " + department.getDepartmentName());
+            System.out.println("--------------------------------------");
+        });
+
+        // 6. Count the number of cities each country has. Return country ID and number of cities
+        List<Object[]> countryCityCounts = countryRepository.findCountryAndCityCount();
+        System.out.println("\n6. Count the number of cities each country has. Return country ID and number of cities\n");
+        for (Object[] result : countryCityCounts) {
+            System.out.println("Country ID: " + result[0]);
+            System.out.println("Number of Cities: " + result[1]);
+            System.out.println("------------------------");
+        }
+
+        // 7. Display the department name, city, and state province for each department
+        List<Object[]> departmentInfo = departmentRepository.findDepartmentLocationInfo();
+        System.out.println("\n7. Display the department name, city, and state province for each department\n");
+        departmentInfo.forEach(info -> {
+            String departmentName = (String) info[0];
+            String city = (String) info[1];
+            String stateProvince = (String) info[2];
+            System.out.println("Department Name: " + departmentName);
+            System.out.println("City: " + city);
+            System.out.println("State/Province: " + stateProvince);
+            System.out.println("--------------------------------------");
+        });
+
+        // 8. Display the last name, job, department number and department name for all employees who work in 'Toronto' city
+        List<Object[]> employeesInToronto = employeeRepository.findEmployeesInToronto();
+        System.out.println("\n8. Display the last name, job, department number and department name for all employees who work in 'Toronto' city\n");
+        employeesInToronto.forEach(result -> {
+            System.out.println("Last Name: " + result[0]);
+            System.out.println("Job: " + result[1]);
+            System.out.println("Department Number: " + result[2]);
+            System.out.println("Department Name: " + result[3]);
+            System.out.println("--------------------------------------");
+        });
+
+        // 9. Display the average of sum of the salaries and group the result with the department id. Order the result with department id
+        List<Object[]> avgSalaryByDepartment = employeeRepository.findAvgSalaryByDepartment();
+        System.out.println("\n9. Display the average of sum of the salaries and group the result with the department id. Order the result with department id\n");
+        System.out.printf("%-15s %15s\n", "Department ID", "Average Salary");
+        System.out.println("--------------------------------------");
+        for (Object[] result : avgSalaryByDepartment) {
+            System.out.printf("%-15s %15s\n", result[0], result[1]);
+        }
+
+
+        // 10. Select the Manager name, department id of manager, the count of employees working under that manager as Total_Employees
+        List<Object[]> managerAndTotalEmployees = employeeRepository.findManagerAndTotalEmployees();
+        System.out.println("\n10. Select the Manager name, department id of manager, the count of employees working under that manager as Total_Employees\n");
+        managerAndTotalEmployees.forEach(result -> {
+            String managerName = (String) result[0];
+            int departmentId = (int) result[1];
+            long totalEmployees = (long) result[2];
+    
+            System.out.println("Manager Name: " + managerName);
+            System.out.println("Department ID: " + departmentId);
+            System.out.println("Total Employees: " + totalEmployees);
+            System.out.println("--------------------------------------");
+        });
+    }
+
+    public static void printEmployeeInfo(List<EmployeesEntity> employees) {
+        employees.forEach(employee -> {
             System.out.println("Employee ID: " + employee.getEmployeeId());
             System.out.println("First Name: " + employee.getFirstName());
             System.out.println("Last Name: " + employee.getLastName());
@@ -46,7 +130,6 @@ public class HRManagerService {
             System.out.println("Department ID: " + employee.getDepartmentId());
             System.out.println("--------------------------------------");
         });
-
     }
 }
 
