@@ -1,12 +1,11 @@
 package Model;
 
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 import java.sql.Date;
 
 @Entity
-@jakarta.persistence.Table(name = "employees", schema = "hr", catalog = "")
+@jakarta.persistence.Table(name = "employees", schema = "hr")
 public class EmployeesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -139,5 +138,17 @@ public class EmployeesEntity {
 
     public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "department_id", insertable = false, updatable = false)
+    private DepartmentsEntity department;
+
+    public DepartmentsEntity getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(DepartmentsEntity department) {
+        this.department = department;
     }
 }

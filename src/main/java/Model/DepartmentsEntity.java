@@ -2,8 +2,10 @@ package Model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
-@jakarta.persistence.Table(name = "departments", schema = "hr", catalog = "")
+@jakarta.persistence.Table(name = "departments", schema = "hr")
 public class DepartmentsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -40,5 +42,16 @@ public class DepartmentsEntity {
 
     public void setLocationId(Integer locationId) {
         this.locationId = locationId;
+    }
+
+    @OneToMany(mappedBy = "department")
+    private List<EmployeesEntity> employees;
+
+    public List<EmployeesEntity> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<EmployeesEntity> employees) {
+        this.employees = employees;
     }
 }

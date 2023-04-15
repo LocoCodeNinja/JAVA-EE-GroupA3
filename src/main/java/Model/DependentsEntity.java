@@ -3,7 +3,7 @@ package Model;
 import jakarta.persistence.Entity;
 
 @Entity
-@jakarta.persistence.Table(name = "dependents", schema = "hr", catalog = "")
+@jakarta.persistence.Table(name = "dependents", schema = "hr")
 public class DependentsEntity {
     @jakarta.persistence.GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     @jakarta.persistence.Id

@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import java.sql.Date;
 
 @Entity
-@jakarta.persistence.Table(name = "job_history", schema = "hr", catalog = "")
+@jakarta.persistence.Table(name = "job_history", schema = "hr")
 @jakarta.persistence.IdClass(Model.JobHistoryEntityPK.class)
 public class JobHistoryEntity {
     @jakarta.persistence.GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)

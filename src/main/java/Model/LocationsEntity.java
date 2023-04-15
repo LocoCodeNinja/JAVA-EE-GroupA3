@@ -3,7 +3,7 @@ package Model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "locations", schema = "hr", catalog = "")
+@Table(name = "locations", schema = "hr")
 public class LocationsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -71,5 +71,16 @@ public class LocationsEntity {
 
     public void setCountryId(String countryId) {
         this.countryId = countryId;
+    }
+    @ManyToOne
+    @JoinColumn(name = "country_id", insertable = false, updatable = false)
+    private CountriesEntity country;
+
+    public CountriesEntity getCountry() {
+        return country;
+    }
+
+    public void setCountry(CountriesEntity country) {
+        this.country = country;
     }
 }
