@@ -44,8 +44,8 @@ public interface EmployeeRepository extends CrudRepository<EmployeesEntity, Inte
 
     // get job_id where job_title CONTAINS "Manager", in EMPLOYEES find job_id matches job_id of those with Manager,
     // concat first and last name, get department_id, get count of all employees under that department_id  as Total_Employees
-    @Query("SELECT CONCAT(e.firstName, ' ', e.lastName) as managerName, e.departmentId, (SELECT COUNT(*) FROM EmployeesEntity " +
-            "WHERE departmentId = e.departmentId) as totalEmployees " +
+    @Query("SELECT CONCAT(e.firstName, ' ', e.lastName) as managerName, " +
+            "e.departmentId, (SELECT COUNT(*) FROM EmployeesEntity WHERE departmentId = e.departmentId) as totalEmployees " +
             "FROM EmployeesEntity e " +
             "JOIN JobsEntity j ON e.jobId = j.jobId " +
             "WHERE j.jobTitle LIKE '%Manager%'") // if "Manager" is in the string

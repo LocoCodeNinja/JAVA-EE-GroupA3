@@ -13,7 +13,6 @@ import java.util.List;
 @Service("HRManagerService")
 public class HRManagerService {
 
-
     @Autowired
     private EmployeeRepository employeeRepository;
 
@@ -23,7 +22,6 @@ public class HRManagerService {
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private CountryRepository countryRepository;
-
 
     public void runQueries() {
         // demonstrate usage of all Repository classes
