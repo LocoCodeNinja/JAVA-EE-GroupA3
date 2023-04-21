@@ -26,30 +26,63 @@ public class HRManagerService {
     public void runQueries() {
         // demonstrate usage of all Repository classes
 
+        /*
         // 1. Find all Employees whose salary is in the range 9000, 17000
         List<EmployeesEntity> employeesBySalaryRange = employeeRepository.findEmployeesBySalaryRange();
         System.out.println("\n1. Find all Employees whose salary is in the range 9000, 17000\n");
         // display the list of EmployeesEntity objects
         printEmployeeInfo(employeesBySalaryRange);
+        */
 
+        // 1.5. Find all Employees whose salary is between 9000 and 17000
+        List<EmployeesEntity> employeesBySalaryBetween = employeeRepository.findBySalaryBetween(9000, 17000);
+        System.out.println("\n1. Find all Employees whose salary is between 9000 and 17000\n");
+        // display the list of EmployeesEntity objects
+        printEmployeeInfo(employeesBySalaryBetween);
+
+        /*
         // 2. Find all Employees whose first name ends with Letter a
         List<EmployeesEntity> employeesWithFirstNameEndingA = employeeRepository.findEmployeesByFirstNameEndsWithA();
         System.out.println("\n2. Find all Employees whose first name ends with Letter 'a'\n");
         // display the list of EmployeesEntity objects
         printEmployeeInfo(employeesWithFirstNameEndingA);
+        */
 
+        // 2.5. Find all Employees whose first name ends with Letter a
+        List<EmployeesEntity> findByFirstNameEndingWith = employeeRepository.findByFirstNameEndingWith("a");
+        System.out.println("\n2. Find all Employees whose first name ends with Letter 'a'\n");
+        // display the list of EmployeesEntity objects
+        printEmployeeInfo(findByFirstNameEndingWith);
+
+        /*
         // 3. Find all Employees working in Accounting Department
         List<EmployeesEntity> employeesInAccounting = employeeRepository.findEmployeesInAccountingDepartment();
         System.out.println("\n3. Find all Employees working in Accounting Department\n");
         // display the list of EmployeesEntity objects
         printEmployeeInfo(employeesInAccounting);
+        */
 
+        // 3.5 Find all Employees working in Accounting Department
+        List<EmployeesEntity> findByDepartment_DepartmentName = employeeRepository.findByDepartment_DepartmentName("Accounting");
+        System.out.println("\n3. Find all Employees working in Accounting Department\n");
+        // display the list of EmployeesEntity objects
+        printEmployeeInfo(findByDepartment_DepartmentName);
+
+        /*
         // 4. Find all Employees working under Manager ID 108
         List<EmployeesEntity> employeesUnderManager108 = employeeRepository.findEmployeesByManagerId();
         System.out.println("\n4. Find all Employees working under Manager ID 108\n");
         // display the list of EmployeesEntity objects
         printEmployeeInfo(employeesUnderManager108);
+        */
 
+        // 4.5. Find all Employees working under Manager ID 108
+        List<EmployeesEntity> findByManagerId = employeeRepository.findByManagerId(108);
+        System.out.println("\n4. Find all Employees working under Manager ID 108\n");
+        // display the list of EmployeesEntity objects
+        printEmployeeInfo(findByManagerId);
+
+        /*
         // 5. Find all Departments with Location ID 1700
         List<DepartmentsEntity> departmentsInLocation1700 = departmentRepository.findDepartmentsByLocationId();
         System.out.println("\n5. Find all Departments with Location ID 1700\n");
@@ -59,6 +92,18 @@ public class HRManagerService {
             System.out.println("Department Name: " + department.getDepartmentName());
             System.out.println("--------------------------------------");
         });
+        */
+
+        // 5.5. Find all Departments with Location ID 1700
+        List<DepartmentsEntity> findByLocationId = departmentRepository.findByLocationId(1700);
+        System.out.println("\n5. Find all Departments with Location ID 1700\n");
+        // display the DepartmentsEntity objects
+        findByLocationId.forEach(department -> {
+            System.out.println("Department ID: " + department.getDepartmentId());
+            System.out.println("Department Name: " + department.getDepartmentName());
+            System.out.println("--------------------------------------");
+        });
+
 
         // 6. Count the number of cities each country has. Return country ID and number of cities
         List<Object[]> countryCityCounts = countryRepository.findCountryAndCityCount();

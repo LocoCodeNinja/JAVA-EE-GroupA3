@@ -20,6 +20,7 @@ public class CountriesEntity {
     @Column(name = "region_id", nullable = false)
     private int regionId;
 
+    // define a one-to-many relationship between CountryEntity and LocationsEntity using JPA
     @OneToMany(mappedBy = "country")
     private List<LocationsEntity> locations;
 

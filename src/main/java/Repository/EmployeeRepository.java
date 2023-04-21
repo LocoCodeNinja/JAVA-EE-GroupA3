@@ -12,9 +12,15 @@ public interface EmployeeRepository extends CrudRepository<EmployeesEntity, Inte
     @Query("SELECT e FROM EmployeesEntity e WHERE e.salary BETWEEN 9000 AND 17000")
     List<EmployeesEntity> findEmployeesBySalaryRange();
 
+    // selects data from EmployeesEntity where salary is between minSalary and maxSalary
+    List<EmployeesEntity> findBySalaryBetween(int minSalary, int maxSalary);
+
     // selects data from EmployeesEntity where firstName ends with a
     @Query("SELECT e FROM EmployeesEntity e WHERE e.firstName LIKE '%a'")
     List<EmployeesEntity> findEmployeesByFirstNameEndsWithA();
+
+    // selects data from EmployeesEntity where firstName ends with suffix
+    List<EmployeesEntity> findByFirstNameEndingWith(String suffix);
 
     // selects data from EmployeesEntity where departmentName from department is Accounting
     // basically matching employees from two tables where departmentName is "Accounting"
@@ -22,9 +28,15 @@ public interface EmployeeRepository extends CrudRepository<EmployeesEntity, Inte
             "WHERE d.departmentName = 'Accounting'")
     List<EmployeesEntity> findEmployeesInAccountingDepartment();
 
+    // selects data from EmployeesEntity where departmentName from department is departmentName
+    List<EmployeesEntity> findByDepartment_DepartmentName(String departmentName);
+
     // selects data from EmployeesEntity where managerId is 108
     @Query("SELECT e FROM EmployeesEntity e WHERE e.managerId = 108")
     List<EmployeesEntity> findEmployeesByManagerId();
+
+    // selects data from EmployeesEntity where id is managerId
+    List<EmployeesEntity> findByManagerId(Integer managerId);
 
     // select data from EmployeesEntity and match with DepartmentsEntity and LocationsEntity where city is "Toronto"
     @Query("SELECT e.lastName, j.jobTitle, d.departmentId, d.departmentName " +

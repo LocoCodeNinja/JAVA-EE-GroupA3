@@ -12,6 +12,9 @@ public interface DepartmentRepository extends CrudRepository<DepartmentsEntity, 
     @Query("SELECT d FROM DepartmentsEntity d WHERE d.locationId = 1700")
     List<DepartmentsEntity> findDepartmentsByLocationId();
 
+    // selects data from DepartmentsEntity where ID is locationId
+    List<DepartmentsEntity> findByLocationId(Integer locationId);
+
     // display the department name, city, and state province for each department.
     @Query("SELECT d.departmentName, l.city, l.stateProvince " +
             "FROM DepartmentsEntity d " +
