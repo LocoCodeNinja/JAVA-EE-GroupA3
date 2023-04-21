@@ -15,6 +15,9 @@ public interface EmployeeRepository extends CrudRepository<EmployeesEntity, Inte
     // selects data from EmployeesEntity where salary is between minSalary and maxSalary
     List<EmployeesEntity> findBySalaryBetween(int minSalary, int maxSalary);
 
+    // selects data from EmployeesEntity where salary is between minSalary and maxSalary, with order
+    List<EmployeesEntity> findBySalaryBetweenOrderBySalaryDesc(int minSalary, int maxSalary);
+
     // selects data from EmployeesEntity where firstName ends with a
     @Query("SELECT e FROM EmployeesEntity e WHERE e.firstName LIKE '%a'")
     List<EmployeesEntity> findEmployeesByFirstNameEndsWithA();

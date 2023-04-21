@@ -35,7 +35,7 @@ public class HRManagerService {
         */
 
         // 1.5. Find all Employees whose salary is between 9000 and 17000
-        List<EmployeesEntity> employeesBySalaryBetween = employeeRepository.findBySalaryBetween(9000, 17000);
+        List<EmployeesEntity> employeesBySalaryBetween = employeeRepository.findBySalaryBetweenOrderBySalaryDesc(9000, 17000);
         System.out.println("\n1. Find all Employees whose salary is between 9000 and 17000\n");
         // display the list of EmployeesEntity objects
         printEmployeeInfo(employeesBySalaryBetween);
@@ -175,15 +175,13 @@ public class HRManagerService {
 
     public static void printEmployeeInfo(List<EmployeesEntity> employees) {
         employees.forEach(employee -> {
+            System.out.println("Salary: $" + employee.getSalary());
             System.out.println("Employee ID: " + employee.getEmployeeId());
             System.out.println("Full Name: " + employee.getFirstName() + " " + employee.getLastName());
-            // System.out.println("First Name: " + employee.getFirstName());
-            // System.out.println("Last Name: " + employee.getLastName());
             System.out.println("Email: " + employee.getEmail());
             System.out.println("Phone Number: " + employee.getPhoneNumber());
             System.out.println("Hire Date: " + employee.getHireDate());
             System.out.println("Job ID: " + employee.getJobId());
-            System.out.println("Salary: " + employee.getSalary());
             System.out.println("Commission Pct: " + employee.getCommissionPct());
             System.out.println("Manager ID: " + employee.getManagerId());
             System.out.println("Department ID: " + employee.getDepartmentId());
