@@ -1,5 +1,5 @@
 # JAVA-EE-GroupA3 by Group 1
-# Kit Louanglath & James Keenleyside
+# Kit Louanglath
 # Date Completed: April 15, 2023
 
 Spring Console App using Spring Data JPA and MySQL DB. Using HR_SCHEMA.txt
